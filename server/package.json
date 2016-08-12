@@ -1,0 +1,20 @@
+{
+  "name": "bishop-server",
+  "version": "0.0.0",
+  "description": "Server code for bishop",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "googleapis": "^12.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"no tests yet\"",
+    "start": "node ./",
+    "watch": "nodemon ./"
+  },
+  "author": "Andy Perlitch",
+  "license": "MIT"
+}
