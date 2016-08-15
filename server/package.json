@@ -9,6 +9,7 @@
     "express": "^4.14.0",
     "google-speech-api": "^1.2.0",
     "googleapis": "^12.2.0",
+    "sox-audio": "github:andyperlitch/sox-audio#output-endianness",
     "through2": "^2.0.1",
     "wav": "^1.0.1"
   },

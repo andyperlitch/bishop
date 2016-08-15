@@ -23,7 +23,7 @@ var app = express();
 // app.use(bodyParser());
 
 app.post('/api/recognize-speech', function(req, res) {
-  console.log('recognizing speech...');
+  console.log('Recognizing speech...');
   // var writer = fs.createWriteStream('./sample' + Math.random() + '.wav', { defaultEncoding: 'binary'  });
   // req.pipe(writer).on('end', function() {
   //   res.end();
@@ -37,7 +37,7 @@ app.post('/api/recognize-speech', function(req, res) {
     }
     console.log('success!', result);
     res.json(result);
-  })
+  });
 });
 
 app.listen(process.env.SERVER_PORT);
