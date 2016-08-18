@@ -21,9 +21,11 @@ import {IQueryEvent} from '../interfaces/query-event';
         #editor
         [hidden]="!editing"
         (keyup)="onKeyUp($event)"
+        (blur)="onBlur()"
         [(ngModel)]="editedValue"
       />
     </p>
+    <p [hidden]="!editing" class="query-help-text">press enter or esc</p>
   `,
   styles: [`
     p {
@@ -46,9 +48,13 @@ import {IQueryEvent} from '../interfaces/query-event';
       display: none;
     }
     input {
-      border-radius: 2em;
-      border: 1px solid #CCC;
-      background-color: white;
+      border: none;
+      font-style: normal;
+      background-color: transparent;
+    }
+    .query-help-text {
+      font-size: 11px;
+      color: #555;
     }
   `]
 })
@@ -88,6 +94,13 @@ export class QueryDisplay implements OnChanges {
         this.toggleEdit();
         this.editedValue = this.query;
       break;
+    }
+  }
+
+  onBlur() : void {
+    if (this.editing) {
+      this.toggleEdit();
+      this.editedValue = this.query;
     }
   }
 
