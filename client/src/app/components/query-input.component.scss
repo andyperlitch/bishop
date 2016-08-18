@@ -11,6 +11,7 @@
   color: #777;
   cursor: pointer;
   outline: none;
+  position: relative;
   &:hover {
     color: #62a062;
     box-shadow: inset 0 -3px 15px -3px white,
@@ -22,5 +23,15 @@
     box-shadow: inset 0 -3px 15px -3px white,
                 inset 0 2px 8px rgba(0,0,0,0.2),
                 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .loader {
+    font-size: 7px;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: absolute;
+    color: #e26322;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

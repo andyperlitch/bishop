@@ -1,3 +1,4 @@
+var path = require('path');
 var fs = require('fs');
 var SoxCommand = require('sox-audio');
 var google = require('googleapis');
@@ -14,7 +15,7 @@ function recognizer(request, cb) {
 
     // write request to temp wav file
     console.log('Writing tmp file...');
-    var tmpBaseName = './tmp/sample' + Math.random();
+    var tmpBaseName = path.join(__dirname, 'tmp/sample' + Math.random());
     var tmpWavFileLocation = tmpBaseName + '.wav';
     var tmpRawFileLocation = tmpBaseName + '.raw';
     var writer = fs.createWriteStream(tmpWavFileLocation, { defaultEncoding: 'binary'  });

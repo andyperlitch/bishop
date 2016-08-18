@@ -4,7 +4,7 @@ import {FORM_PROVIDERS} from '@angular/common';
 
 import '../style/app.scss';
 
-import {QueryInput} from './components/query-input.component';
+import {QueryInput, IQuery} from './components/query-input.component';
 
 import {Api} from './services/api';         // ./services/api/index.ts
 
@@ -34,9 +34,17 @@ import {Api} from './services/api';         // ./services/api/index.ts
     template: `
       <main>
         <h1 class="title">Bishop, at your service.</h1>
-        <query-input></query-input>
+        <query-input (query)="onQuery($event)"></query-input>
+        <p>{{ queryText }}</p>
       </main>
     `
 })
 
-export class App {}
+export class App {
+
+  queryText: string;
+
+  onQuery (evt: IQuery) : void {
+    this.queryText = evt.value;
+  }
+}
