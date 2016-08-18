@@ -1,11 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import {IQueryEvent} from '../interfaces/query-event';
+import {IRecordingStartEvent} from '../interfaces/recording-start-event';
+
 let MediaStreamRecorder = require('msr');
 
 const MAX_SECONDS_FOR_QUERY = 10;
 
-export interface IQuery {
-  value: string;
-}
+
 
 @Component({
   selector: 'query-input',
@@ -24,10 +25,12 @@ export interface IQuery {
 })
 export class QueryInput {
 
-  @Output() query: EventEmitter<IQuery> = new EventEmitter<IQuery>();
-  currentRecorder: any;
-  currentStream: MediaStream;
-  processingSpeech: boolean = false;
+  @Output() start: EventEmitter<IRecordingStartEvent> = new EventEmitter<IRecordingStartEvent>();
+  @Output() query: EventEmitter<IQueryEvent> = new EventEmitter<IQueryEvent>();
+
+  private currentRecorder: any;
+  private currentStream: MediaStream;
+  private processingSpeech: boolean = false;
 
   captureQuery() : void {
     let constraints : MediaStreamConstraints = {

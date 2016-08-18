@@ -24,6 +24,12 @@ var app = express();
 
 app.post('/api/recognize-speech', function(req, res) {
   console.log('Recognizing speech...');
+
+  setTimeout(function() {
+    res.json({"results":[{"alternatives":[{"transcript":"what's the capital of Germany","confidence":0.97225028}]}]});
+  }, 100);
+  return;
+
   // var writer = fs.createWriteStream('./sample' + Math.random() + '.wav', { defaultEncoding: 'binary'  });
   // req.pipe(writer).on('end', function() {
   //   res.end();

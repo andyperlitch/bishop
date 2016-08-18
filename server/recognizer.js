@@ -24,6 +24,11 @@ function recognizer(request, cb) {
 
       // convert file to raw
       console.log('Converting wav file (' + tmpWavFileLocation + ') to raw (' + tmpRawFileLocation + ')...');
+
+      // start [testing]
+      // tmpWavFileLocation = path.join(__dirname, 'test/capital-of-germany.wav'); // what is the capital of germany
+      // end [testing]
+
       var command = SoxCommand(tmpWavFileLocation)
       .output(tmpRawFileLocation)
       .outputEndian('little')
