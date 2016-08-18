@@ -13,8 +13,12 @@ describe('Api Service', () => {
 
   beforeEachProviders(() => [Api]);
 
-  it('should ...', inject([Api], (api:Api) => {
-    expect(api.title).toBe('Angular 2');
-  }));
+  // describe('recognizeSpeech method', () => {
+  //   it('should return a promise', inject([Api], (api:Api) => {
+  //     expect(api.recognizeSpeech).toBe('Angular 2');
+  //   }));
+  // });
+
+
 
 });

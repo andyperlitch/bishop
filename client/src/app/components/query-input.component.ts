@@ -1,12 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import {IQueryEvent} from '../interfaces/query-event';
-import {IRecordingStartEvent} from '../interfaces/recording-start-event';
+import {IRecordingStartEvent, IRecognizeSpeechResponse} from '../interfaces';
+import {Api} from '../services/api';
 
-let MediaStreamRecorder = require('msr');
-
+const MediaStreamRecorder = require('msr');
 const MAX_SECONDS_FOR_QUERY = 10;
-
-
 
 @Component({
   selector: 'query-input',
@@ -31,6 +29,8 @@ export class QueryInput {
   private currentRecorder: any;
   private currentStream: MediaStream;
   private processingSpeech: boolean = false;
+
+  constructor (private api: Api) {}
 
   captureQuery() : void {
     let constraints : MediaStreamConstraints = {
@@ -57,33 +57,22 @@ export class QueryInput {
     }
   }
 
-  onCaptureSuccess(response: any) : void {
-    console.log('success', response);
+  onCaptureSuccess(response: IRecognizeSpeechResponse) : void {
     this.processingSpeech = false;
-    try {
-      let json: any = JSON.parse(response.target.responseText);
-      this.query.emit({
-        value: json.results[0].alternatives[0].transcript
-      });
-    } catch (e) {
-      console.log('error with capturing query', e);
-    }
+    this.query.emit({
+      value: response.results[0].alternatives[0].transcript
+    });
   }
 
   onCaptureError(response: any) : void {
-    console.log('error', response);
     this.processingSpeech = false;
   }
 
   private sendRequest(blob: Blob) : void {
-    // POST/PUT "Blob" using FormData/XHR2
-    let xhr: XMLHttpRequest = new XMLHttpRequest();
-    // xhr.addEventListener("progress", updateProgress);
-    xhr.addEventListener("load",  (response: any) => { this.onCaptureSuccess(response); });
-    xhr.addEventListener("error", (response: any) => { this.onCaptureError(response); });
-    xhr.open('POST', '/api/recognize-speech');
-    xhr.setRequestHeader('Content-Type', 'audio/x-wav');
-    xhr.send(blob);
+    this.api.recognizeSpeech(blob).then(
+      (response: IRecognizeSpeechResponse) => { this.onCaptureSuccess(response); },
+      (response: any) => { this.onCaptureError(response); }
+    );
     this.processingSpeech = true;
   }
 

@@ -7,7 +7,7 @@ import {
   Input,
   SimpleChanges
 } from '@angular/core';
-import {IQueryEvent} from '../interfaces/query-event';
+import {IQueryEvent} from '../interfaces';
 
 @Component({
   selector: 'query-display',
@@ -68,7 +68,6 @@ export class QueryDisplay implements OnChanges {
 
   ngOnChanges (changes: SimpleChanges) : void {
     if (changes['query'].currentValue) {
-      console.log('query changed', changes['query'].currentValue);
       this.editedValue = changes['query'].currentValue.toString();
     }
   }

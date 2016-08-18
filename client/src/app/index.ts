@@ -40,13 +40,11 @@ import {Api} from './services/api';         // ./services/api/index.ts
       </main>
     `
 })
-
 export class App {
 
   private queryText: string;
 
   onQuery (evt: IQueryEvent) : void {
-    console.log('onQuery');
     this.queryText = evt.value;
   }
 }
